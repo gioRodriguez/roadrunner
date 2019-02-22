@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Roadrunner.DriverClient;
 using Roadrunner.Utils;
 
 namespace Roadrunner.DriversSimulator
@@ -28,6 +27,11 @@ namespace Roadrunner.DriversSimulator
             return new Driver(id, regionWidth, regionHeight, movementTimeSpan);
         }
 
+        private Task<TripRequestAnswer> ReceivedTripRequest(TripRequest tripRequest)
+        {
+            return Task.FromResult(TripRequestAnswer.Ok());
+        }
+
         public Task StartAsync(CancellationToken ct)
         {
             var driverApiKey = DriversApiKeys.SetupDriverApiKey(Id);
@@ -36,16 +40,23 @@ namespace Roadrunner.DriversSimulator
             var y = random.Next(0, _regionHeight);
             return Task.Run(async () =>
             {
+                var roadRunnerDriverClient = new RoadRunnerDriverClient.Builder(Id, driverApiKey)
+                    .OnReceivedTripRequest(ReceivedTripRequest)
+                    .Build();
+
                 while (!ct.IsCancellationRequested)
                 {
                     await Task.Delay((int)_movementTimeSpan.TotalMilliseconds, ct);                    
                     x += random.Next(-1, 1);
                     y += random.Next(-1, 1);
 
-                    Console.WriteLine($"Hello driver{Id} is at ({x},{y})");
+                    await roadRunnerDriverClient.ReportMovementAsync(x, y);
+                    Console.WriteLine($"Hello driver{Id} is at ({x},{y})");                   
                 }
             }, ct);
         }
+
+
         
     }
 }

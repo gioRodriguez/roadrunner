@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.DriversSimulator", "Roadrunner.DriversSimulator\Roadrunner.DriversSimulator.csproj", "{BE8CFC95-6575-45B4-828B-38930C6F31B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.DriversSimulator", "Roadrunner.DriversSimulator\Roadrunner.DriversSimulator.csproj", "{BE8CFC95-6575-45B4-828B-38930C6F31B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.Utils", "Roadrunner.Utils\Roadrunner.Utils.csproj", "{2AA7FD94-5D54-47E3-8710-CE09E7955551}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Utils", "Roadrunner.Utils\Roadrunner.Utils.csproj", "{2AA7FD94-5D54-47E3-8710-CE09E7955551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.DriverClient", "Roadrunner.DriverClient\Roadrunner.DriverClient.csproj", "{22A4B5CD-2003-49C5-96D6-5E311818AE7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2AA7FD94-5D54-47E3-8710-CE09E7955551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA7FD94-5D54-47E3-8710-CE09E7955551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA7FD94-5D54-47E3-8710-CE09E7955551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22A4B5CD-2003-49C5-96D6-5E311818AE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A4B5CD-2003-49C5-96D6-5E311818AE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A4B5CD-2003-49C5-96D6-5E311818AE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A4B5CD-2003-49C5-96D6-5E311818AE7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

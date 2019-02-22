@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Roadrunner.DriverClient\Roadrunner.DriverClient.csproj" />
     <ProjectReference Include="..\Roadrunner.Utils\Roadrunner.Utils.csproj" />
   </ItemGroup>
 
