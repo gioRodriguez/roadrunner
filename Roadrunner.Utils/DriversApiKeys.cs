@@ -5,21 +5,26 @@ namespace Roadrunner.Utils
 {
     public class DriversApiKeys
     {
-        private static ConcurrentDictionary<int, string> ApiKeys = new ConcurrentDictionary<int, string>();
+        private static ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
 
-        public static string SetupDriverApiKey(int driverId)
+        public static string SetupUserApiKey(string userId)
         {
-            if (!ApiKeys.ContainsKey(driverId))
+            if (!ApiKeys.ContainsKey(userId))
             {
-                ApiKeys.TryAdd(driverId, GetRansomApiKey());
+                ApiKeys.TryAdd(userId, GetRandomApiKey());
             }
 
-            return ApiKeys[driverId];
+            return ApiKeys[userId];
         }
 
-        private static string GetRansomApiKey()
+        private static string GetRandomApiKey()
         {
             return Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+        }
+
+        public static string GetUserKey(string userId)
+        {
+            return ApiKeys[userId];
         }
     }
 }

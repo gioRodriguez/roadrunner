@@ -34,7 +34,7 @@ namespace Roadrunner.DriversSimulator
 
         public Task StartAsync(CancellationToken ct)
         {
-            var driverApiKey = DriversApiKeys.SetupDriverApiKey(Id);
+            var driverApiKey = DriversApiKeys.SetupUserApiKey($"driver-{Id}");
             var random = new Random();
             var x = random.Next(0, _regionWidth);
             var y = random.Next(0, _regionHeight);
@@ -43,6 +43,8 @@ namespace Roadrunner.DriversSimulator
                 var roadRunnerDriverClient = new RoadRunnerDriverClient.Builder(Id, driverApiKey)
                     .OnReceivedTripRequest(ReceivedTripRequest)
                     .Build();
+
+                
 
                 while (!ct.IsCancellationRequested)
                 {
