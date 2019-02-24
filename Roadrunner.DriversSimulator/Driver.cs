@@ -29,7 +29,7 @@ namespace Roadrunner.DriversSimulator
 
         private Task<TripRequestAnswer> ReceivedTripRequest(TripRequest tripRequest)
         {
-            return Task.FromResult(TripRequestAnswer.Ok());
+            return Task.FromResult(TripRequestAnswer.Accepted());
         }
 
         public Task StartAsync(CancellationToken ct)

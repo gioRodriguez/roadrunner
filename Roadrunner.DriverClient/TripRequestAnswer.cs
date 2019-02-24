@@ -9,7 +9,7 @@ namespace Roadrunner.DriverClient
         private TripRequestAnswer()
         {}
 
-        public static TripRequestAnswer Ok()
+        public static TripRequestAnswer Accepted()
         {
             return new TripRequestAnswer
             {
