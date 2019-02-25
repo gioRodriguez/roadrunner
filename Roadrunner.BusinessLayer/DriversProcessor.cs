@@ -24,13 +24,18 @@ namespace Roadrunner.BusinessLayer
 
         public async Task DriverReadyAtPositionAsync(Position position)
         {
-            if (!_roadrunnerIdentity.IsAuthenticated())
-            {
-                throw new UnauthorizedAccessException();
-            }
+            _roadrunnerIdentity.ThrowUnautorizedIfNotAuthenticated();
 
             await _driversRepository.DriverReadyAtPositionAsync(_roadrunnerIdentity.GetUserId(), position);
             _historyRepository.DriverReadyAtPositionAsync(_roadrunnerIdentity.GetUserId(), position);
+        }
+
+        public async Task DriverPositionUpdateAsync(Position position)
+        {
+            _roadrunnerIdentity.ThrowUnautorizedIfNotAuthenticated();
+
+            await _driversRepository.DriverPositionUpdateAsync(_roadrunnerIdentity.GetUserId(), position);
+            _historyRepository.DriverPositionUpdateAsync(_roadrunnerIdentity.GetUserId(), position);
         }
     }
 }

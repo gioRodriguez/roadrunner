@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Roadrunner.Utils;
 
 namespace Roadrunner.Web.Middleware
@@ -21,7 +23,9 @@ namespace Roadrunner.Web.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            if (IsOldRequest(context) || IsInvalidAuthHeader(context) || IsInvalidSignature(context))
+            context.Request.EnableRewind();
+
+            if (IsInvalidAuthHeader(context) || IsInvalidSignature(context))
             {
                 context.Response.StatusCode = 401; //Unauthorized
                 return;
@@ -69,12 +73,7 @@ namespace Roadrunner.Web.Middleware
             var authParts = AuthorizationHeader(context).Split(' ', ':');
             var userId = authParts[1];
             var requestSignature = authParts[2];
-            return requestSignature != AuthSignature.GenerateSignature(StringToSign(context.Request), Encoding.UTF8.GetBytes(DriversApiKeys.GetUserKey(userId)));
-        }
-
-        private static string StringToSign(HttpRequest contextRequest)
-        {
-            return string.Format("{0} {1}", contextRequest.Method, contextRequest.GetUri());
+            return requestSignature != AuthSignature.GenerateSignature(userId, Encoding.UTF8.GetBytes(DriversApiKeys.GetUserKey(userId)));
         }
     }
 }

@@ -14,5 +14,11 @@ namespace Roadrunner.DataLayer
             DriversAtPosition[driverId] = position;
             return Task.CompletedTask;
         }
+
+        public Task DriverPositionUpdateAsync(string driverId, Position position)
+        {
+            DriversAtPosition[driverId] = position;
+            return Task.CompletedTask;
+        }
     }
 }

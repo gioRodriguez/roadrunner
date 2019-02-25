@@ -4,5 +4,6 @@
     {
         bool IsAuthenticated();
         string GetUserId();
+        void ThrowUnautorizedIfNotAuthenticated();
     }
 }

@@ -1,23 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Roadrunner.BusinessInterfaces;
+using Roadrunner.Types;
+using Roadrunner.Web.Models;
 
 namespace Roadrunner.Web.Hubs
 {
     public class DriverHub : Hub<IDriverHub>
     {
-        private const string DriverGrpName = "drivers";
+        private readonly IDriversProcessor _driversProcessor;
 
-        public Task Subscribe()
+        public DriverHub(IDriversProcessor driversProcessor)
         {
-            return Groups.AddToGroupAsync(Context.ConnectionId, DriverGrpName);
+            _driversProcessor = driversProcessor;
+        }        
+
+        [Authorize]
+        public Task DriverReadyAtPosition(ReqPositionModel position)
+        {
+            return _driversProcessor.DriverReadyAtPositionAsync(Position.Create(position.X, position.Y));
         }
 
-        public Task Unsuscribe()
+        [Authorize]
+        public Task DriverPositionUpdate(ReqPositionModel position)
         {
-            return Groups.RemoveFromGroupAsync(Context.ConnectionId, DriverGrpName);
+            return _driversProcessor.DriverPositionUpdateAsync(Position.Create(position.X, position.Y));
         }
     }
 }

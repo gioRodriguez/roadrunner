@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Roadrunner.Types;
+using Roadrunner.Web.Models;
 
 namespace Roadrunner.Web.Hubs
 {
     public interface IDriverHub
     {
-        Task SetConnectionId(string connectionId);
-        Task ReportDriverPosition(Position driverPosition);
+        Task DriverReadyAtPosition(ReqPositionModel position);
+        Task DriverPositionUpdate(ReqPositionModel position);
     }
 }
