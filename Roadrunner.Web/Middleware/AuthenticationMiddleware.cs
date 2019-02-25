@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,10 @@ namespace Roadrunner.Web.Middleware
 
             var authParts = AuthorizationHeader(context).Split(' ', ':');
             var userId = authParts[1];
-            context.User = new GenericPrincipal(new GenericIdentity(userId), new string[] { });
+            var idendity = new ClaimsIdentity("roadrunnerApiAuth");
+            idendity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId));
+            idendity.AddClaim(new Claim(ClaimTypes.Name, userId));
+            context.User = new GenericPrincipal(idendity, new string[] { });
             await _next.Invoke(context);
         }
 

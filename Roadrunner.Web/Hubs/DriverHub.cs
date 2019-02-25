@@ -27,5 +27,11 @@ namespace Roadrunner.Web.Hubs
         {
             return _driversProcessor.DriverPositionUpdateAsync(Position.Create(position.X, position.Y));
         }
+
+        [Authorize]
+        public Task DriverTripAccepted()
+        {
+            return _driversProcessor.DriverTripAcceptedAsync();
+        }
     }
 }

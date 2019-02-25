@@ -7,5 +7,6 @@ namespace Roadrunner.BusinessInterfaces
     {
         Task DriverReadyAtPositionAsync(Position position);
         Task DriverPositionUpdateAsync(Position position);
+        Task DriverTripAcceptedAsync();
     }
 }

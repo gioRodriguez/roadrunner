@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Roadrunner.BusinessInterfaces;
 using Roadrunner.DataInterfaces;
 using Roadrunner.Types;
@@ -36,6 +33,12 @@ namespace Roadrunner.BusinessLayer
 
             await _driversRepository.DriverPositionUpdateAsync(_roadrunnerIdentity.GetUserId(), position);
             _historyRepository.DriverPositionUpdateAsync(_roadrunnerIdentity.GetUserId(), position);
+        }
+
+        public Task DriverTripAcceptedAsync()
+        {
+            _roadrunnerIdentity.ThrowUnautorizedIfNotAuthenticated();
+            return Task.CompletedTask;            
         }
     }
 }

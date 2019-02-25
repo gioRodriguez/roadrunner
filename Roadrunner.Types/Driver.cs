@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Roadrunner.Types
+﻿namespace Roadrunner.Types
 {
     public class Driver
     {
+        public string Id { get; set; }
     }
 }

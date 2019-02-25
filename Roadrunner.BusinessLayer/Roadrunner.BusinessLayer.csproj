@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="4.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Roadrunner.BusinessInterfaces\Roadrunner.BusinessInterfaces.csproj" />
     <ProjectReference Include="..\Roadrunner.DataInterfaces\Roadrunner.DataInterfaces.csproj" />
     <ProjectReference Include="..\Roadrunner.Types\Roadrunner.Types.csproj" />

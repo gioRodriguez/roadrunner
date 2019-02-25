@@ -13,7 +13,7 @@ namespace Roadrunner.DriverClient
         {
             return new TripRequestAnswer
             {
-                Answer = TripRequestAnswers.Ok
+                Answer = TripRequestAnswers.Accepted
             };
         }
 
@@ -22,7 +22,7 @@ namespace Roadrunner.DriverClient
 
         public enum TripRequestAnswers
         {
-            Ok
+            Accepted
         }
     }
 }

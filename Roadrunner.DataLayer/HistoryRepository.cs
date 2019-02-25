@@ -16,13 +16,13 @@ namespace Roadrunner.DataLayer
 
         public Task DriverReadyAtPositionAsync(string driverId, Position position)
         {
-            _logger.LogInformation($"{driverId} : {position.X},{position.Y}");
+            //_logger.LogInformation($"{driverId} : {position.X},{position.Y}");
             return Task.CompletedTask;
         }
 
         public Task DriverPositionUpdateAsync(string driverId, Position position)
         {
-            _logger.LogInformation($"{driverId} : {position.X},{position.Y}");
+            //_logger.LogInformation($"{driverId} : {position.X},{position.Y}");
             return Task.CompletedTask;
         }
     }

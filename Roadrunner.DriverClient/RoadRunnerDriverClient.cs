@@ -44,6 +44,17 @@ namespace Roadrunner.DriverClient
                 await _connection.StartAsync();
             };
 
+            _connection.On<string>("NewTripRequest", async passengerId =>
+            {
+                Console.WriteLine($"Trip request received by {_driverId}");
+
+                var answer = await _receivedTripRequest(new TripRequest { PassengerId = passengerId });
+                if (answer.Answer == TripRequestAnswer.TripRequestAnswers.Accepted)
+                {
+                    await _connection.InvokeAsync("DriverTripAccepted");
+                }
+            });
+
             await _connection.StartAsync();
             await _connection.InvokeAsync("DriverReadyAtPosition", new PositionModel { X = x, Y = y });
         }        
