@@ -28,9 +28,13 @@ namespace Roadrunner.DataLayer
             var random = new Random();
             return Task.FromResult(new Driver
             {
-                Id = "driver-0"
-                //Id = DriversAtPosition.ElementAt(random.Next(0, DriversAtPosition.Count)).Key
+                Id = DriversAtPosition.ElementAt(random.Next(0, DriversAtPosition.Count)).Key
             });
+        }
+
+        public Task DriverTripAcceptedAsync(string driverId, string passengerId)
+        {
+            return Task.CompletedTask;
         }
     }
 }

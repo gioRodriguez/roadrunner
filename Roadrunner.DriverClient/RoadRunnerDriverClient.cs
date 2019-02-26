@@ -28,36 +28,46 @@ namespace Roadrunner.DriverClient
             _receivedTripRequest = receivedTripRequest;
         }
 
-        public async Task ReportReadyAtPositionAsync(int x, int y)
-        {                
-            var accessToken =$"{_driverId}:{Signature(_driverId, Encoding.UTF8.GetBytes(_driverApiKey))}";
-            _connection = new HubConnectionBuilder()
+        public async Task StartClient(int x, int y)
+        {
+            _connection = CreateHubConnection();
+            RegisterIncominEvents(_connection);
+            await _connection.StartAsync();
+            await _connection.InvokeAsync("DriverReadyAtPosition", new PositionModel { X = x, Y = y });
+        }
+
+        private void RegisterIncominEvents(HubConnection conn)
+        {
+            conn.On<string>("NewTripRequest", async passengerId =>
+            {
+                Console.WriteLine($"Trip request received by {_driverId} issue by {passengerId}");
+
+                var answer = await _receivedTripRequest(new TripRequest { PassengerId = passengerId });
+                if (answer.Answer == TripRequestAnswer.TripRequestAnswers.Accepted)
+                {
+                    await conn.InvokeAsync("DriverTripAccepted", passengerId);
+                }
+            });
+        }
+
+        private HubConnection CreateHubConnection()
+        {
+            var accessToken = $"{_driverId}:{Signature(_driverId, Encoding.UTF8.GetBytes(_driverApiKey))}";
+            var conn = new HubConnectionBuilder()
                 .WithUrl($"{_roadrunnerUrl}/driversHub", options =>
                 {
                     options.AccessTokenProvider = () => Task.FromResult(accessToken);
-                })                
+                })
                 .Build();
 
-            _connection.Closed += async (error) =>
+            conn.Closed += async (error) =>
             {
                 await Task.Delay(new Random().Next(0, 5) * 1000);
                 await _connection.StartAsync();
             };
 
-            _connection.On<string>("NewTripRequest", async passengerId =>
-            {
-                Console.WriteLine($"Trip request received by {_driverId}");
-
-                var answer = await _receivedTripRequest(new TripRequest { PassengerId = passengerId });
-                if (answer.Answer == TripRequestAnswer.TripRequestAnswers.Accepted)
-                {
-                    await _connection.InvokeAsync("DriverTripAccepted");
-                }
-            });
-
-            await _connection.StartAsync();
-            await _connection.InvokeAsync("DriverReadyAtPosition", new PositionModel { X = x, Y = y });
-        }        
+            return conn;
+        }
 
         private static string Signature(string url, byte[] key)
         {

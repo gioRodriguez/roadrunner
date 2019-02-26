@@ -44,7 +44,7 @@ namespace Roadrunner.DriversSimulator
                     .OnReceivedTripRequest(ReceivedTripRequest)
                     .Build();
 
-                await roadRunnerDriverClient.ReportReadyAtPositionAsync(x, y);
+                await roadRunnerDriverClient.StartClient(x, y);
 
                 while (!ct.IsCancellationRequested)
                 {

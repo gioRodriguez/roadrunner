@@ -9,21 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Utils", "Roadrun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.DriverClient", "Roadrunner.DriverClient\Roadrunner.DriverClient.csproj", "{22A4B5CD-2003-49C5-96D6-5E311818AE7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.Web", "Roadrunner.Web\Roadrunner.Web.csproj", "{A74796EE-F3CF-4D2F-9ACD-A40F0581C7A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Web", "Roadrunner.Web\Roadrunner.Web.csproj", "{A74796EE-F3CF-4D2F-9ACD-A40F0581C7A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.Instrumentation", "Roadrunner.Instrumentation\Roadrunner.Instrumentation.csproj", "{B77301AC-0F7B-4BDB-8394-4C007AE34677}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Instrumentation", "Roadrunner.Instrumentation\Roadrunner.Instrumentation.csproj", "{B77301AC-0F7B-4BDB-8394-4C007AE34677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.Types", "Roadrunner.Types\Roadrunner.Types.csproj", "{1AE620F2-626B-497C-B3C9-FA0F8839694E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Types", "Roadrunner.Types\Roadrunner.Types.csproj", "{1AE620F2-626B-497C-B3C9-FA0F8839694E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.BusinessInterfaces", "Roadrunner.BusinessInterfaces\Roadrunner.BusinessInterfaces.csproj", "{C997CAB2-C546-4B55-8C24-309FA4C4CB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.BusinessInterfaces", "Roadrunner.BusinessInterfaces\Roadrunner.BusinessInterfaces.csproj", "{C997CAB2-C546-4B55-8C24-309FA4C4CB3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.Test", "Roadrunner.Test\Roadrunner.Test.csproj", "{7B7B015A-35BB-425C-8E35-D71E0EDF3FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.Test", "Roadrunner.Test\Roadrunner.Test.csproj", "{7B7B015A-35BB-425C-8E35-D71E0EDF3FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.DataInterfaces", "Roadrunner.DataInterfaces\Roadrunner.DataInterfaces.csproj", "{34A4B7DB-EDCF-4CD7-8B1E-C2032FCE52AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.DataInterfaces", "Roadrunner.DataInterfaces\Roadrunner.DataInterfaces.csproj", "{34A4B7DB-EDCF-4CD7-8B1E-C2032FCE52AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.BusinessLayer", "Roadrunner.BusinessLayer\Roadrunner.BusinessLayer.csproj", "{646B80A0-BB3C-4B72-92B3-F60E36F47475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.BusinessLayer", "Roadrunner.BusinessLayer\Roadrunner.BusinessLayer.csproj", "{646B80A0-BB3C-4B72-92B3-F60E36F47475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.DataLayer", "Roadrunner.DataLayer\Roadrunner.DataLayer.csproj", "{89782AB8-06F4-40C7-9E10-3A58B3CA2C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roadrunner.DataLayer", "Roadrunner.DataLayer\Roadrunner.DataLayer.csproj", "{89782AB8-06F4-40C7-9E10-3A58B3CA2C5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadrunner.PassengersSimulator", "Roadrunner.PassengersSimulator\Roadrunner.PassengersSimulator.csproj", "{16849076-C728-4205-99BD-EF5F0D214D0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{89782AB8-06F4-40C7-9E10-3A58B3CA2C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89782AB8-06F4-40C7-9E10-3A58B3CA2C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89782AB8-06F4-40C7-9E10-3A58B3CA2C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16849076-C728-4205-99BD-EF5F0D214D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16849076-C728-4205-99BD-EF5F0D214D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16849076-C728-4205-99BD-EF5F0D214D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16849076-C728-4205-99BD-EF5F0D214D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

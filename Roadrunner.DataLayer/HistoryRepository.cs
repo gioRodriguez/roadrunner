@@ -25,5 +25,11 @@ namespace Roadrunner.DataLayer
             //_logger.LogInformation($"{driverId} : {position.X},{position.Y}");
             return Task.CompletedTask;
         }
+
+        public Task DriverTripAcceptedAsync(string driverId, string passengerId)
+        {
+            //_logger.LogInformation($"{driverId} : {passengerId}");
+            return Task.CompletedTask;
+        }
     }
 }

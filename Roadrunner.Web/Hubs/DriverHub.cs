@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Roadrunner.BusinessInterfaces;
 using Roadrunner.Types;
+using Roadrunner.Utils.Identity;
 using Roadrunner.Web.Models;
 
 namespace Roadrunner.Web.Hubs
@@ -10,10 +11,14 @@ namespace Roadrunner.Web.Hubs
     public class DriverHub : Hub<IDriverHub>
     {
         private readonly IDriversProcessor _driversProcessor;
+        private readonly IHubContext<PassengersHub> _passengersHub;
+        private readonly IRoadrunnerIdentity _roadrunnerIdentity;
 
-        public DriverHub(IDriversProcessor driversProcessor)
+        public DriverHub(IDriversProcessor driversProcessor, IHubContext<PassengersHub> passengersHub, IRoadrunnerIdentity roadrunnerIdentity)
         {
             _driversProcessor = driversProcessor;
+            _passengersHub = passengersHub;
+            _roadrunnerIdentity = roadrunnerIdentity;
         }        
 
         [Authorize]
@@ -29,9 +34,10 @@ namespace Roadrunner.Web.Hubs
         }
 
         [Authorize]
-        public Task DriverTripAccepted()
+        public async Task DriverTripAccepted(string passengerId)
         {
-            return _driversProcessor.DriverTripAcceptedAsync();
+            await _passengersHub.Clients.User(passengerId).SendAsync("DriverAssigned", _roadrunnerIdentity.GetUserId());
+            await _driversProcessor.DriverTripAcceptedAsync(passengerId);
         }
     }
 }

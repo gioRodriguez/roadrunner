@@ -52,6 +52,7 @@ namespace Roadrunner.Web
             app.UseSignalR(routes =>
             {
                 routes.MapHub<DriverHub>("/driversHub");
+                routes.MapHub<PassengersHub>("/passengersHub");
             });
         }
     }

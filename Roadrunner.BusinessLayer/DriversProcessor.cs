@@ -35,10 +35,12 @@ namespace Roadrunner.BusinessLayer
             _historyRepository.DriverPositionUpdateAsync(_roadrunnerIdentity.GetUserId(), position);
         }
 
-        public Task DriverTripAcceptedAsync()
+        public async Task DriverTripAcceptedAsync(string passengerId)
         {
             _roadrunnerIdentity.ThrowUnautorizedIfNotAuthenticated();
-            return Task.CompletedTask;            
+
+            await _driversRepository.DriverTripAcceptedAsync(_roadrunnerIdentity.GetUserId(), passengerId);
+            _historyRepository.DriverTripAcceptedAsync(_roadrunnerIdentity.GetUserId(), passengerId);
         }
     }
 }
