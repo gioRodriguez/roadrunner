@@ -36,8 +36,14 @@ namespace Roadrunner.BusinessLayer
 
         private void ResolverDriverForTrip(NewTrip newTrip, Action<NewTrip, Driver> onNewTrip)
         {
-
             var driver = _driverResolver.ResolverDriverForNewTripAsync(newTrip).Result;
+            if (driver == null)
+            {
+                // if driver not found, ask the trip again
+                _tripsRepository.TripRequestAsync(newTrip.PassengerId, newTrip.Origin, newTrip.Destiny).Wait();
+                return;
+            }
+
             onNewTrip(newTrip, driver);
         }
     }

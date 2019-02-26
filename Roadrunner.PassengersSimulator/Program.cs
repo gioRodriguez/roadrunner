@@ -13,17 +13,18 @@ namespace Roadrunner.PassengersSimulator
         {
             try
             {
-                var hubConn = StartClient().Result;
+                var random = new Random();
+                var passengerId = $"passenger-{random.Next(0, 1000)}";
+                var hubConn = StartClient(passengerId).Result;
                 while (true)
                 {
                     Console.WriteLine("To request a trip press <space>");
                     var key = Console.ReadKey();
                     if (key.Key == ConsoleKey.Spacebar)
                     {
-                        var random = new Random();
                         var origin = new PositionModel {X = random.Next(0, 100), Y = random.Next(0, 100)};
                         var destiny = new PositionModel {X = random.Next(0, 100), Y = random.Next(0, 100)};
-                        Console.WriteLine($"Asking a new trip from origin: {origin.X}, {origin.Y} with destiny: {destiny.X}, {destiny.Y}");
+                        Console.WriteLine($"{passengerId} has asked a new trip from origin: {origin.X}, {origin.Y} with destiny: {destiny.X}, {destiny.Y}");
                         hubConn.InvokeAsync("TripRequest", origin, destiny);                        
                     }
                 }
@@ -34,18 +35,16 @@ namespace Roadrunner.PassengersSimulator
             }
         }
 
-        public static async Task<HubConnection> StartClient()
+        public static async Task<HubConnection> StartClient(string passengerId)
         {
-            var _connection = CreateHubConnection();
+            var _connection = CreateHubConnection(passengerId);
             RegisterIncominEvents(_connection);
             await _connection.StartAsync();
             return _connection;
         }
 
-        private static HubConnection CreateHubConnection()
+        private static HubConnection CreateHubConnection(string passengerId)
         {
-            var random = new Random();
-            var passengerId = $"passenger-{random.Next(0, 1000)}";
             var accessToken = $"{passengerId}:{Signature(passengerId, Encoding.UTF8.GetBytes(passengerId))}";
             var conn = new HubConnectionBuilder()
                 .WithUrl("http://localhost:49844/passengersHub", options =>

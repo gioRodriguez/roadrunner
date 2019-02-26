@@ -25,6 +25,11 @@ namespace Roadrunner.DataLayer
 
         public Task<Driver> GetRandomDriverAsync()
         {
+            if (!DriversAtPosition.Any())
+            {
+                return Task.FromResult<Driver>(null);
+            }
+
             var random = new Random();
             return Task.FromResult(new Driver
             {
