@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Roadrunner.DriverClient.Models;
 
 namespace Roadrunner.DriverClient

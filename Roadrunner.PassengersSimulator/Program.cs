@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -14,24 +13,30 @@ namespace Roadrunner.PassengersSimulator
             try
             {
                 var random = new Random();
+                Console.WriteLine("Please wait till the server is ready, then press enter");
+                Console.ReadLine();
+
                 var passengerId = $"passenger-{random.Next(0, 1000)}";
                 var hubConn = StartClient(passengerId).Result;
+                Console.WriteLine("To request trips press <space>");
+
                 while (true)
                 {
-                    Console.WriteLine("To request a trip press <space>");
                     var key = Console.ReadKey();
                     if (key.Key == ConsoleKey.Spacebar)
                     {
                         var origin = new PositionModel {X = random.Next(0, 100), Y = random.Next(0, 100)};
                         var destiny = new PositionModel {X = random.Next(0, 100), Y = random.Next(0, 100)};
-                        Console.WriteLine($"{passengerId} has asked a new trip from origin: {origin.X}, {origin.Y} with destiny: {destiny.X}, {destiny.Y}");
-                        hubConn.InvokeAsync("TripRequest", origin, destiny);                        
+                        Console.WriteLine($"\n\n{passengerId} has asked a new trip from origin: {origin.X}, {origin.Y} with destiny: {destiny.X}, {destiny.Y}");
+                        hubConn.InvokeAsync("TripRequest", origin, destiny);
                     }
+
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.ReadKey();
             }
         }
 

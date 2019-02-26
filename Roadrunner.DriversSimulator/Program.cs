@@ -38,6 +38,7 @@ namespace Roadrunner.DriversSimulator
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                Console.ReadKey();
             }            
         }
     }

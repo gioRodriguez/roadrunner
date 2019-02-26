@@ -20,6 +20,7 @@ namespace Roadrunner.Web
                     logger.AddDebug();
                     logger.AddConsole();
                 })
+                .UseUrls("http://localhost:49844/")
                 .Build();
     }
 }
